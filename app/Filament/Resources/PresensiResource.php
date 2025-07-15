@@ -18,6 +18,9 @@ class PresensiResource extends Resource
     protected static ?string $model = Presensi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Data Presensi';
+    protected static ?string $label = 'Presensi';
+    protected static ?string $pluralLabel = 'Data Presensi Pekerja';
 
     public static function form(Form $form): Form
     {
@@ -89,6 +92,11 @@ class PresensiResource extends Resource
     {
         return parent::getEloquentQuery()
             ->orderBy('waktu_presensi', 'desc');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) \App\Models\Presensi::count();
     }
 
 }

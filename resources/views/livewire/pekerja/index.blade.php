@@ -1,7 +1,7 @@
 <div class="p-10 bg-white rounded shadow">
     <h2 class="text-xl font-bold mb-4">Daftar Pekerja</h2>
 
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-2 mb-6">
         <input type="text" wire:model.defer="searchInput" placeholder="Cari pekerja..." class="border p-2 rounded w-64">
         <button wire:click="cari" class="bg-blue-500 text-white px-3 py-1 rounded">Cari</button>
         <button wire:click="resetSearch" class="bg-gray-300 px-3 py-1 rounded">Reset</button>
@@ -11,7 +11,7 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="border px-2 py-1">No</th>
-                <th class="border px-2 py-1">Nama</th>
+                <th class="border px-2 py-1">Nama Pekerja</th>
                 <th class="border px-2 py-1">Nomor Pekerja</th>
                 <th class="border px-2 py-1">Divisi</th>
             </tr>

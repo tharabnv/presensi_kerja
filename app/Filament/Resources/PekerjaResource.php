@@ -18,6 +18,9 @@ class PekerjaResource extends Resource
     protected static ?string $model = Pekerja::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationLabel = 'Data Pekerja';
+    protected static ?string $label = 'Pekerja';
+    protected static ?string $pluralLabel = 'Data Pekerja';
 
     public static function form(Form $form): Form
     {
@@ -74,4 +77,10 @@ class PekerjaResource extends Resource
             'index' => Pages\ManagePekerjas::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) \App\Models\Pekerja::count();
+    }
+
 }

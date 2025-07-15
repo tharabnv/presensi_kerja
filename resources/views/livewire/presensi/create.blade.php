@@ -9,24 +9,29 @@
         @endif
 
         <form wire:submit.prevent="simpan">
+            {{-- Nama Pekerja --}}
             <div class="mb-4">
                 <label for="nama_pekerja" class="block font-semibold">Nama Pekerja</label>
                 <input type="text" id="nama_pekerja" wire:model.defer="nama_pekerja" class="border p-2 w-full rounded">
                 @error('nama_pekerja') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
+            {{-- Nomor Pekerja --}}
             <div class="mb-4">
                 <label for="nomor_pekerja" class="block font-semibold">Nomor Pekerja</label>
                 <input type="text" id="nomor_pekerja" wire:model.defer="nomor_pekerja" class="border p-2 w-full rounded">
+                <small class="text-gray-500 text-sm">Contoh: NP****</small>
                 @error('nomor_pekerja') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
+            {{-- Waktu Presensi --}}
             <div class="mb-4">
                 <label for="waktu_presensi" class="block font-semibold">Waktu Presensi</label>
                 <input type="datetime-local" id="waktu_presensi" wire:model.defer="waktu_presensi" class="border p-2 w-full rounded">
                 @error('waktu_presensi') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
+            {{-- Keterangan --}}
             <div class="mb-4">
                 <label for="keterangan" class="block font-semibold">Keterangan</label>
                 <select id="keterangan" wire:model.defer="keterangan" class="border p-2 w-full rounded">
@@ -38,6 +43,7 @@
                 @error('keterangan') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
+            {{-- Tombol --}}
             <div class="flex justify-end">
                 <a href="{{ route('presensi.index') }}" class="mr-2 px-4 py-2 bg-gray-300 rounded">Batal</a>
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">Simpan</button>

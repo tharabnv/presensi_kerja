@@ -6,7 +6,7 @@ use App\Livewire\Presensi\Create;
 use App\Livewire\Pekerja\Index as PekerjaIndex;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 Route::middleware([

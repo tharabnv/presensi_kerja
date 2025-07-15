@@ -13,14 +13,21 @@ class Create extends Component
     public $waktu_presensi;
     public $keterangan;
 
+    protected $rules = [
+        'nama_pekerja' => 'required|string|max:255',
+        'nomor_pekerja' => 'required|regex:/^NP\d{1,8}$/|max:10',
+        'waktu_presensi' => 'required|date',
+        'keterangan' => 'required|in:Masuk,Sakit,Izin',
+    ];
+
+    protected $messages = [
+        'nomor_pekerja.regex' => 'Nomor pekerja harus diawali dengan "NP"',
+        'nomor_pekerja.max' => 'Nomor pekerja maksimal 10 karakter.',
+    ];
+
     public function simpan()
     {
-        $this->validate([
-            'nama_pekerja' => 'required|string',
-            'nomor_pekerja' => 'required|string',
-            'waktu_presensi' => 'required|date',
-            'keterangan' => 'required|string|in:Masuk,Sakit,Izin',
-        ]);
+        $this->validate(); // ⬅️ pakai rules yang sudah kamu definisikan
 
         Presensi::create([
             'nama_pekerja' => $this->nama_pekerja,
