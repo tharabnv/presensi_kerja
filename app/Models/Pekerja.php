@@ -12,6 +12,7 @@ class Pekerja extends Model
     protected $fillable = [
         'nama_pekerja',
         'nomor_pekerja',
+        'email',
         'divisi',
     ];
 }

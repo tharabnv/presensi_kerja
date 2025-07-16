@@ -19,6 +19,7 @@ class PekerjaFactory extends Factory
         return [
             'nama_pekerja' => $this->faker->name(),
             'nomor_pekerja' => 'NP' . $this->faker->unique()->numerify('####'),
+            'email' => $this->faker->unique()->safeEmail,
             'divisi' => $this->faker->randomElement(['Produksi', 'SDM', 'Keuangan', 'IT', 'Marketing']),
         ];
     }

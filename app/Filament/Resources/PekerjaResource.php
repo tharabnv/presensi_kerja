@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PekerjaResource\Pages;
-use App\Filament\Resources\PekerjaResource\RelationManagers;
 use App\Models\Pekerja;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PekerjaResource extends Resource
 {
@@ -32,6 +30,10 @@ class PekerjaResource extends Resource
                 Forms\Components\TextInput::make('nomor_pekerja')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('divisi')
                     ->required()
                     ->maxLength(255),
@@ -46,6 +48,8 @@ class PekerjaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nomor_pekerja')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('divisi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -57,9 +61,7 @@ class PekerjaResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -82,5 +84,4 @@ class PekerjaResource extends Resource
     {
         return (string) \App\Models\Pekerja::count();
     }
-
 }
