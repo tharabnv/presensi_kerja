@@ -4,10 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Presensi\Index;
 use App\Livewire\Presensi\Create;
 use App\Livewire\Pekerja\Index as PekerjaIndex;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
+use App\Http\Middleware\CheckEmail;
 
 Route::get('/', function () {
     return view('landing');
 });
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware(['guest', CheckEmail::class]);
 
 Route::middleware([
     'auth:sanctum',

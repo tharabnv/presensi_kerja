@@ -12,14 +12,14 @@
             {{-- Nama Pekerja --}}
             <div class="mb-4">
                 <label for="nama_pekerja" class="block font-semibold">Nama Pekerja</label>
-                <input type="text" id="nama_pekerja" wire:model.defer="nama_pekerja" class="border p-2 w-full rounded">
+                <input type="text" id="nama_pekerja" wire:model.defer="nama_pekerja" class="border p-2 w-full rounded bg-gray-100" readonly>
                 @error('nama_pekerja') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
             {{-- Nomor Pekerja --}}
             <div class="mb-4">
                 <label for="nomor_pekerja" class="block font-semibold">Nomor Pekerja</label>
-                <input type="text" id="nomor_pekerja" wire:model.defer="nomor_pekerja" class="border p-2 w-full rounded">
+                <input type="text" id="nomor_pekerja" wire:model.defer="nomor_pekerja" class="border p-2 w-full rounded bg-gray-100" readonly>
                 <small class="text-gray-500 text-sm">Contoh: NP****</small>
                 @error('nomor_pekerja') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>

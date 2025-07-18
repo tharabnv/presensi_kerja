@@ -4,6 +4,8 @@ namespace App\Livewire\Presensi;
 
 use Livewire\Component;
 use App\Models\Presensi;
+use App\Models\Pekerja;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class Create extends Component
@@ -14,20 +16,28 @@ class Create extends Component
     public $keterangan;
 
     protected $rules = [
-        'nama_pekerja' => 'required|string|max:255',
-        'nomor_pekerja' => 'required|regex:/^NP\d{1,8}$/|max:10',
         'waktu_presensi' => 'required|date',
         'keterangan' => 'required|in:Masuk,Sakit,Izin',
     ];
 
-    protected $messages = [
-        'nomor_pekerja.regex' => 'Nomor pekerja harus diawali dengan "NP"',
-        'nomor_pekerja.max' => 'Nomor pekerja maksimal 10 karakter.',
-    ];
+    public function mount()
+    {
+        $user = Auth::user();
+
+        $pekerja = Pekerja::where('email', $user->email)->first();
+
+        if ($pekerja) {
+            $this->nama_pekerja = $pekerja->nama_pekerja;
+            $this->nomor_pekerja = $pekerja->nomor_pekerja;
+        } else {
+            $this->nama_pekerja = $user->name;
+            $this->nomor_pekerja = '';
+        }
+    }
 
     public function simpan()
     {
-        $this->validate(); // ⬅️ pakai rules yang sudah kamu definisikan
+        $this->validate();
 
         Presensi::create([
             'nama_pekerja' => $this->nama_pekerja,
@@ -38,7 +48,7 @@ class Create extends Component
 
         session()->flash('success', 'Data presensi berhasil disimpan.');
 
-        return redirect()->route('presensi.index');
+        return redirect()->to(route('presensi.index'));
     }
 
     public function render()
