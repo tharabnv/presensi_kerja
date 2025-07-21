@@ -2,8 +2,16 @@
     <div class="p-10 bg-white rounded shadow w-[500px]">
         <h2 class="text-xl font-bold mb-4 text-center">Tambah Presensi</h2>
 
+        {{-- Alert pesan error --}}
+        @if (session()->has('error'))
+            <div class="bg-red-100 text-red-700 p-2 rounded mb-4 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        {{-- Alert pesan sukses --}}
         @if (session()->has('success'))
-            <div class="bg-green-100 text-green-700 p-2 rounded mb-4">
+            <div class="bg-green-100 text-green-700 p-2 rounded mb-4 text-center">
                 {{ session('success') }}
             </div>
         @endif
@@ -24,11 +32,10 @@
                 @error('nomor_pekerja') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Waktu Presensi --}}
+            {{-- Waktu Presensi (readonly tampilkan waktu server) --}}
             <div class="mb-4">
-                <label for="waktu_presensi" class="block font-semibold">Waktu Presensi</label>
-                <input type="datetime-local" id="waktu_presensi" wire:model.defer="waktu_presensi" class="border p-2 w-full rounded">
-                @error('waktu_presensi') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                <label class="block font-semibold">Waktu Presensi</label>
+                <input type="text" class="border p-2 w-full rounded bg-gray-100" value="{{ now()->format('Y-m-d H:i') }}" readonly>
             </div>
 
             {{-- Keterangan --}}
@@ -43,7 +50,7 @@
                 @error('keterangan') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Tombol --}}
+            {{-- Tombol Aksi --}}
             <div class="flex justify-end">
                 <a href="{{ route('presensi.index') }}" class="mr-2 px-4 py-2 bg-gray-300 rounded">Batal</a>
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">Simpan</button>

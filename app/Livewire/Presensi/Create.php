@@ -6,17 +6,14 @@ use Livewire\Component;
 use App\Models\Presensi;
 use App\Models\Pekerja;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class Create extends Component
 {
     public $nama_pekerja;
     public $nomor_pekerja;
-    public $waktu_presensi;
     public $keterangan;
 
     protected $rules = [
-        'waktu_presensi' => 'required|date',
         'keterangan' => 'required|in:Masuk,Sakit,Izin',
     ];
 
@@ -39,10 +36,20 @@ class Create extends Component
     {
         $this->validate();
 
+        // Cek apakah sudah presensi hari ini
+        $sudahPresensi = Presensi::where('nomor_pekerja', $this->nomor_pekerja)
+            ->whereDate('waktu_presensi', now()->toDateString())
+            ->exists();
+
+        if ($sudahPresensi) {
+            session()->flash('error', 'Anda sudah melakukan presensi hari ini.');
+            return;
+        }
+
         Presensi::create([
             'nama_pekerja' => $this->nama_pekerja,
             'nomor_pekerja' => $this->nomor_pekerja,
-            'waktu_presensi' => Carbon::parse($this->waktu_presensi),
+            'waktu_presensi' => now(), // waktu otomatis dari server
             'keterangan' => $this->keterangan,
         ]);
 

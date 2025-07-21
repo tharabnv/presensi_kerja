@@ -18,7 +18,7 @@ class PekerjaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Data Pekerja';
     protected static ?string $label = 'Pekerja';
-    protected static ?string $pluralLabel = 'Data Pekerja';
+    protected static ?string $pluralLabel = 'Data Pekerja'; 
 
     public static function form(Form $form): Form
     {
