@@ -7,6 +7,11 @@ use App\Livewire\Pekerja\Index as PekerjaIndex;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use App\Http\Middleware\CheckEmail;
 
+// Model untuk hitung jumlah
+use App\Models\Pekerja;
+use App\Models\Presensi;
+use App\Models\User;
+
 Route::get('/', function () {
     return view('landing');
 });
@@ -20,7 +25,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard', [
+            'jumlahPekerja' => Pekerja::count(),
+            'totalPresensi' => Presensi::count(),
+            'totalUser' => User::count(),
+        ]);
     })->name('dashboard');
 
     Route::get('/presensi', Index::class)->name('presensi.index');

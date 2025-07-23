@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('pekerjas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pekerja');
+            $table->string('nama'); // ganti dari 'nama_pekerja' ke 'nama'
             $table->string('nomor_pekerja')->unique();
             $table->string('divisi');
+            $table->string('email')->unique()->nullable(); // untuk relasi ke user atau identifikasi login
             $table->timestamps();
         });
     }

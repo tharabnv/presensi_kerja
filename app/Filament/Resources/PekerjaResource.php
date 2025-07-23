@@ -33,10 +33,18 @@ class PekerjaResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->helperText('Contoh: balaiyasayk@gmail.com')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('divisi')
+                Forms\Components\Select::make('divisi')
+                    ->options([
+                        'IT' => 'IT',
+                        'SDM' => 'SDM',
+                        'Produksi' => 'Produksi',
+                        'Marketing' => 'Marketing',
+                        'Keuangan' => 'Keuangan',
+                    ])
                     ->required()
-                    ->maxLength(255),
+                    ->searchable(),
             ]);
     }
 

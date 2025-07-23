@@ -33,6 +33,10 @@ class PresensiResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('waktu_presensi')
+                    ->label('Waktu Presensi')
+                    ->default(now())
+                    ->disabled()
+                    ->dehydrated(true)
                     ->required(),
                 Forms\Components\Select::make('keterangan')
                 ->label('Keterangan')
